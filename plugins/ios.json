@@ -1,0 +1,88 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "framework": {
+                "parents": {
+                    "CoreLocation.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "MessageUI.framework": [
+                        {
+                            "xml": true,
+                            "count": 1
+                        }
+                    ],
+                    "CoreGraphics.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "MapKit.framework": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Compass\"><param name=\"ios-package\" value=\"CDVCompass\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Sms\"><param name=\"ios-package\" value=\"Sms\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SpinnerDialog\"><param name=\"ios-package\" value=\"CDVSpinnerDialog\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"LaunchNavigator\"><param name=\"ios-package\" value=\"LaunchNavigator\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "cordova-plugin-device-orientation": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "com.cordova.plugins.sms": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "hu.dpal.phonegap.plugins.SpinnerDialog": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "uk.co.workingedge.phonegap.plugin.LaunchNavigator": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        }
+    },
+    "dependent_plugins": {}
+}

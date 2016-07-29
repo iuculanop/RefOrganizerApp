@@ -1,0 +1,163 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Compass\"><param name=\"android-package\" value=\"org.apache.cordova.deviceorientation.CompassListener\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Sms\"><param name=\"android-package\" value=\"com.cordova.plugins.sms.Sms\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"SpinnerDialog\"><param name=\"android-package\" value=\"hu.dpal.phonegap.plugins.SpinnerDialog\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"LaunchNavigator\"><param name=\"android-package\" value=\"uk.co.workingedge.phonegap.plugin.LaunchNavigator\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<preference name=\"webView\" value=\"org.crosswalk.engine.XWalkWebViewEngine\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.SEND_SMS\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.telephony\" android:required=\"false\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-device-orientation": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "com.cordova.plugins.sms": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "hu.dpal.phonegap.plugins.SpinnerDialog": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "uk.co.workingedge.phonegap.plugin.LaunchNavigator": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        }
+    },
+    "dependent_plugins": {},
+    "modules": [
+        {
+            "id": "cordova-plugin-device-orientation.CompassError",
+            "file": "plugins/cordova-plugin-device-orientation/www/CompassError.js",
+            "pluginId": "cordova-plugin-device-orientation",
+            "clobbers": [
+                "CompassError"
+            ]
+        },
+        {
+            "id": "cordova-plugin-device-orientation.CompassHeading",
+            "file": "plugins/cordova-plugin-device-orientation/www/CompassHeading.js",
+            "pluginId": "cordova-plugin-device-orientation",
+            "clobbers": [
+                "CompassHeading"
+            ]
+        },
+        {
+            "id": "cordova-plugin-device-orientation.compass",
+            "file": "plugins/cordova-plugin-device-orientation/www/compass.js",
+            "pluginId": "cordova-plugin-device-orientation",
+            "clobbers": [
+                "navigator.compass"
+            ]
+        },
+        {
+            "id": "com.cordova.plugins.sms.Sms",
+            "file": "plugins/com.cordova.plugins.sms/www/sms.js",
+            "pluginId": "com.cordova.plugins.sms",
+            "clobbers": [
+                "window.sms"
+            ]
+        },
+        {
+            "id": "cordova-plugin-splashscreen.SplashScreen",
+            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+            "pluginId": "cordova-plugin-splashscreen",
+            "clobbers": [
+                "navigator.splashscreen"
+            ]
+        },
+        {
+            "id": "hu.dpal.phonegap.plugins.SpinnerDialog.SpinnerDialog",
+            "file": "plugins/hu.dpal.phonegap.plugins.SpinnerDialog/www/spinner.js",
+            "pluginId": "hu.dpal.phonegap.plugins.SpinnerDialog",
+            "merges": [
+                "window.plugins.spinnerDialog"
+            ]
+        },
+        {
+            "id": "uk.co.workingedge.phonegap.plugin.LaunchNavigator.LaunchNavigator",
+            "file": "plugins/uk.co.workingedge.phonegap.plugin.LaunchNavigator/www/android/launchnavigator.js",
+            "pluginId": "uk.co.workingedge.phonegap.plugin.LaunchNavigator",
+            "clobbers": [
+                "launchnavigator"
+            ]
+        }
+    ],
+    "plugin_metadata": {
+        "cordova-plugin-whitelist": "1.2.2",
+        "cordova-plugin-device-orientation": "1.0.1",
+        "com.cordova.plugins.sms": "0.1.4",
+        "cordova-plugin-splashscreen": "2.1.0",
+        "hu.dpal.phonegap.plugins.SpinnerDialog": "1.3.1",
+        "uk.co.workingedge.phonegap.plugin.LaunchNavigator": "2.9.0",
+        "cordova-plugin-crosswalk-webview": "1.2.0"
+    }
+}

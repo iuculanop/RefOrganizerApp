@@ -1,0 +1,170 @@
+.dark {
+  background: #000807;
+  color: #FBF9FF;
+}
+
+.container {
+  width:100%;
+  overflow-x: hidden;
+}
+
+.nopad {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.textcenter {
+  text-align: center !important;
+}
+
+.matches {
+	background: #f5f5f5;
+	border: 2px solid;
+	border-color: #599265;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.custstyle {
+  color: darkblue !important;
+  background-color: lightskyblue !important;
+}
+
+.bottom-left {
+  position:absolute;
+  bottom: 0;
+}
+
+.matchinfo {
+	display: table;
+	width: 100%;
+}
+
+.rightinfo {
+	float: none;
+	display: table-cell;
+}
+
+.match-id {
+	top:1px;
+	right: 4px;
+	margin-bottom: 3px;
+	text-align: right;
+	color: #3c763d;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.onleft {
+	float: left;
+	margin-left: 10px;
+	width: 70%;
+}
+
+.onright {
+	float: right;
+	margin-right: 10px;
+}
+
+.moreinfo {
+    background-color: #FBF9FFF;
+	margin-left: -15px;
+	margin-right: -15px;
+	float: none;
+	display:table-cell;
+	width: 100%;
+	height: 0px;
+	//-webkit-transition: all 0.8s linear;
+  	//-moz-transition: all 0.8s linear;
+    //-o-transition: all 0.8s linear;
+    //-ms-transition: all 0.8s linear;
+    //transition: all 0.8s linear;
+    -webkit-transform: translate3d(0px,0px,0px);
+}
+
+.edit {
+  position: relative;
+  height: 0px;
+  overflow:hidden;
+  transform: translateX(3015px);
+  transition: transform ease-in-out 0.5s;
+}
+
+.edit.visible {
+  height:auto;
+  overflow: visible;
+  transform: translateX(0);
+}
+
+.shown {
+  	height: 230px;
+  	background-color: #FBF9FFF;
+  	-webkit-transform: translate3d(0px,0px,0px);
+}
+
+.notshown {
+	height: 0px;
+	overflow: hidden;
+  	background-color: #FBF9FFF;
+  	-webkit-transform: translate3d(0px,0px,0px);
+}
+
+.match-map {
+	width:100%;
+	height:350px;
+}
+
+.headcenter {
+	position:absolute;
+	color: #FBF9FF;
+	left:50%;
+	top:15px;
+	transform: translate(-50%,0);
+}
+
+.reforg-block {
+	border-right: solid #A9A7A9;
+	height: 50px;
+	color: #A9A7A9;
+}
+
+.reforg-block-last {
+	height: 50px;
+}
+
+.reforg-block p, .reforg-block-last a, a:link, a:hover, a:visited, a:active {
+        padding-top: 8px;
+	color: #FBF9FF;
+	text-decoration: none;
+}
+
+.reforg-dtblock {
+    	border-bottom: solid #403F4C; 
+}
+
+.reforg-team1 {
+	display:inline-block;
+	width: 49%;
+	border-right: 2px dashed;
+	border-right-color: #403F4C;
+	text-align: center;
+}
+
+.reforg-team2 {
+	display:inline-block;
+	width: 49%;
+	text-align: center;
+}
+
+.activesub {
+	border-top: 2px solid;
+	border-top-color: #A9A7A9;	
+}
+
+.activesub p {
+	padding-top: 6px !important;
+}
+	
+.matchsub p {
+	padding-top: 8px;
+}
