@@ -1,0 +1,7 @@
+#Ignore those files
+*~
+#Ignore those folders
+webapp/node_modules
+webapp/test
+webapp/dist
+webapp/bower_components
