@@ -76,9 +76,6 @@
         "cordova-plugin-device-orientation": {
             "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
         },
-        "com.cordova.plugins.sms": {
-            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
-        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
         },
@@ -89,6 +86,12 @@
             "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
         },
         "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "cordova-plugin-sms": {
+            "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
+        },
+        "cordova.plugins.diagnostic": {
             "PACKAGE_NAME": "it.elmariachistudios.reforganizerui"
         }
     },

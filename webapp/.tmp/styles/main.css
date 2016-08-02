@@ -11962,6 +11962,14 @@ button.close {
 }
 
 /* line 24, ../../app/styles/_reforg.scss */
+.btn-trasp {
+  color: #286090;
+  background-color: transparent;
+  border-color: transparent;
+  padding: 0px !important;
+}
+
+/* line 31, ../../app/styles/_reforg.scss */
 .matches {
   background: #f5f5f5;
   border: 2px solid;
@@ -11970,25 +11978,30 @@ button.close {
   margin-bottom: 2px;
 }
 
-/* line 32, ../../app/styles/_reforg.scss */
+/* line 39, ../../app/styles/_reforg.scss */
 .custstyle {
   color: darkblue !important;
   background-color: lightskyblue !important;
 }
 
-/* line 37, ../../app/styles/_reforg.scss */
+/* line 44, ../../app/styles/_reforg.scss */
+.showsms {
+  white-space: normal;
+}
+
+/* line 48, ../../app/styles/_reforg.scss */
 .bottom-left {
   position: absolute;
   bottom: 0;
 }
 
-/* line 42, ../../app/styles/_reforg.scss */
+/* line 53, ../../app/styles/_reforg.scss */
 .matchinfo {
   display: table;
   width: 100%;
 }
 
-/* line 47, ../../app/styles/_reforg.scss */
+/* line 58, ../../app/styles/_reforg.scss */
 .leftinfo {
   border-right: 1px solid;
   background: #599265;
@@ -11998,13 +12011,13 @@ button.close {
   color: white;
 }
 
-/* line 56, ../../app/styles/_reforg.scss */
+/* line 67, ../../app/styles/_reforg.scss */
 .rightinfo {
   float: none;
   display: table-cell;
 }
 
-/* line 61, ../../app/styles/_reforg.scss */
+/* line 72, ../../app/styles/_reforg.scss */
 .match-id {
   top: 1px;
   right: 4px;
@@ -12015,20 +12028,20 @@ button.close {
   font-weight: bold;
 }
 
-/* line 71, ../../app/styles/_reforg.scss */
+/* line 82, ../../app/styles/_reforg.scss */
 .onleft {
   float: left;
   margin-left: 10px;
   width: 70%;
 }
 
-/* line 77, ../../app/styles/_reforg.scss */
+/* line 88, ../../app/styles/_reforg.scss */
 .onright {
   float: right;
   margin-right: 10px;
 }
 
-/* line 82, ../../app/styles/_reforg.scss */
+/* line 93, ../../app/styles/_reforg.scss */
 .moreinfo {
   background-color: #FBF9FFF;
   margin-left: -15px;
@@ -12040,7 +12053,7 @@ button.close {
   -webkit-transform: translate3d(0px, 0px, 0px);
 }
 
-/* line 98, ../../app/styles/_reforg.scss */
+/* line 109, ../../app/styles/_reforg.scss */
 .edit {
   position: relative;
   height: 0px;
@@ -12049,21 +12062,21 @@ button.close {
   transition: transform ease-in-out 0.5s;
 }
 
-/* line 106, ../../app/styles/_reforg.scss */
+/* line 117, ../../app/styles/_reforg.scss */
 .edit.visible {
   height: auto;
   overflow: visible;
   transform: translateX(0);
 }
 
-/* line 112, ../../app/styles/_reforg.scss */
+/* line 123, ../../app/styles/_reforg.scss */
 .shown {
   height: 230px;
   background-color: #FBF9FFF;
   -webkit-transform: translate3d(0px, 0px, 0px);
 }
 
-/* line 118, ../../app/styles/_reforg.scss */
+/* line 129, ../../app/styles/_reforg.scss */
 .notshown {
   height: 0px;
   overflow: hidden;
@@ -12071,13 +12084,13 @@ button.close {
   -webkit-transform: translate3d(0px, 0px, 0px);
 }
 
-/* line 125, ../../app/styles/_reforg.scss */
+/* line 136, ../../app/styles/_reforg.scss */
 .match-map {
   width: 100%;
   height: 350px;
 }
 
-/* line 130, ../../app/styles/_reforg.scss */
+/* line 141, ../../app/styles/_reforg.scss */
 .headcenter {
   position: absolute;
   color: #FBF9FF;
@@ -12086,31 +12099,31 @@ button.close {
   transform: translate(-50%, 0);
 }
 
-/* line 138, ../../app/styles/_reforg.scss */
+/* line 149, ../../app/styles/_reforg.scss */
 .reforg-block {
   border-right: solid #A9A7A9;
   height: 50px;
   color: #A9A7A9;
 }
 
-/* line 144, ../../app/styles/_reforg.scss */
+/* line 155, ../../app/styles/_reforg.scss */
 .reforg-block-last {
   height: 50px;
 }
 
-/* line 148, ../../app/styles/_reforg.scss */
+/* line 159, ../../app/styles/_reforg.scss */
 .reforg-block p, .reforg-block-last a, a:link, a:hover, a:visited, a:active {
   padding-top: 8px;
   color: #FBF9FF;
   text-decoration: none;
 }
 
-/* line 154, ../../app/styles/_reforg.scss */
+/* line 165, ../../app/styles/_reforg.scss */
 .reforg-dtblock {
   border-bottom: solid #403F4C;
 }
 
-/* line 158, ../../app/styles/_reforg.scss */
+/* line 169, ../../app/styles/_reforg.scss */
 .reforg-team1 {
   display: inline-block;
   width: 49%;
@@ -12119,25 +12132,25 @@ button.close {
   text-align: center;
 }
 
-/* line 166, ../../app/styles/_reforg.scss */
+/* line 177, ../../app/styles/_reforg.scss */
 .reforg-team2 {
   display: inline-block;
   width: 49%;
   text-align: center;
 }
 
-/* line 172, ../../app/styles/_reforg.scss */
+/* line 183, ../../app/styles/_reforg.scss */
 .activesub {
   border-top: 2px solid;
   border-top-color: #A9A7A9;
 }
 
-/* line 177, ../../app/styles/_reforg.scss */
+/* line 188, ../../app/styles/_reforg.scss */
 .activesub p {
   padding-top: 6px !important;
 }
 
-/* line 181, ../../app/styles/_reforg.scss */
+/* line 192, ../../app/styles/_reforg.scss */
 .matchsub p {
   padding-top: 8px;
 }

@@ -78,11 +78,11 @@
 	    </form>
       <form name="editContacts" novalidate class="simple-form" ng-show="editableContacts">
 	      <div class="form-group" ng-class="{ 'has-error' : editContacts.mail.$invalid && !editContacts.mail.$pristine}">
-	        <label>Indirizzo principale:</label><br>
+	        <label>Email:</label><br>
 	        <input class="form-control" type="mail" name="mail" ng-model="editedUser.mail" required/>
 	      </div>
 	      <div class="form-group" ng-class="{ 'has-error' : editContacts.phoneNum.$invalid && !editContacts.phoneNum.$pristine}">
-	        <label>Indirizzo secondario: </label><br>
+	        <label>Numero di telefono: </label><br>
 	        <input class="form-control" type="text" name="phoneNum" ng-model="editedUser.phone"/>
 	      </div>
 	      <button ng-click="update()" ng-disabled="editContacts.$invalid" class="btn btn-block btn-primary">

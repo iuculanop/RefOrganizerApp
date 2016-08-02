@@ -25,14 +25,6 @@ module.exports = [
         ]
     },
     {
-        "id": "com.cordova.plugins.sms.Sms",
-        "file": "plugins/com.cordova.plugins.sms/www/sms.js",
-        "pluginId": "com.cordova.plugins.sms",
-        "clobbers": [
-            "window.sms"
-        ]
-    },
-    {
         "id": "cordova-plugin-splashscreen.SplashScreen",
         "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
         "pluginId": "cordova-plugin-splashscreen",
@@ -55,6 +47,22 @@ module.exports = [
         "clobbers": [
             "launchnavigator"
         ]
+    },
+    {
+        "id": "cordova-plugin-sms.SMS",
+        "file": "plugins/cordova-plugin-sms/www/SMS.js",
+        "pluginId": "cordova-plugin-sms",
+        "clobbers": [
+            "window.SMS"
+        ]
+    },
+    {
+        "id": "cordova.plugins.diagnostic.Diagnostic",
+        "file": "plugins/cordova.plugins.diagnostic/www/android/diagnostic.js",
+        "pluginId": "cordova.plugins.diagnostic",
+        "clobbers": [
+            "cordova.plugins.diagnostic"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -62,11 +70,12 @@ module.exports.metadata =
 {
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-device-orientation": "1.0.1",
-    "com.cordova.plugins.sms": "0.1.4",
     "cordova-plugin-splashscreen": "2.1.0",
     "hu.dpal.phonegap.plugins.SpinnerDialog": "1.3.1",
     "uk.co.workingedge.phonegap.plugin.LaunchNavigator": "2.9.0",
-    "cordova-plugin-crosswalk-webview": "1.2.0"
+    "cordova-plugin-crosswalk-webview": "1.2.0",
+    "cordova-plugin-sms": "1.0.5",
+    "cordova.plugins.diagnostic": "3.1.1"
 };
 // BOTTOM OF METADATA
 });

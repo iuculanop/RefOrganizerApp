@@ -15,15 +15,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.cordova.plugins.sms": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/cordova-sms/cordova-sms-plugin.git",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-splashscreen": {
         "source": {
             "type": "registry",
@@ -53,6 +44,22 @@
         "source": {
             "type": "registry",
             "id": "cordova-plugin-crosswalk-webview"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-sms": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-sms"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova.plugins.diagnostic": {
+        "source": {
+            "type": "registry",
+            "id": "cordova.plugins.diagnostic"
         },
         "is_top_level": true,
         "variables": {}

@@ -18,7 +18,8 @@ angular
     'ngSanitize',
     'ngDialog',
     'ngTouch',
-    'ngStorage'
+    'ngStorage',
+    'angular-carousel'
   ])
   .config(["$routeProvider", function ($routeProvider) {
     $routeProvider
@@ -46,7 +47,106 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  }]);
+  }])
+  .run(["$rootScope", function($rootScope) {
+    // setting global variables
+    $rootScope.smsList=[];
+    // checking the permissions - for android 23 or up
+    cordova.plugins.diagnostic.getPermissionAuthorizationStatus(function(status){
+      switch(status){
+      case cordova.plugins.diagnostic.runtimePermissionStatus.GRANTED:
+        console.log("Permission granted to receive sms");
+        break;
+      case cordova.plugins.diagnostic.runtimePermissionStatus.NOT_REQUESTED:
+        console.log("Permission to receive sms has not been requested yet");
+        requestPermission(cordova.plugins.diagnostic.runtimePermission.RECEIVE_SMS);
+        break;
+      case cordova.plugins.diagnostic.runtimePermissionStatus.DENIED:
+        console.log("Permission denied to receive sms - ask again?");
+        break;
+      case cordova.plugins.diagnostic.runtimePermissionStatus.DENIED_ALWAYS:
+        console.log("Permission permanently denied to receive sms - guess we won't be using it then!");
+        break;
+      }
+    }, function(error){
+      console.error("The following error occurred: "+error);
+    }, cordova.plugins.diagnostic.runtimePermission.RECEIVE_SMS);
+
+    cordova.plugins.diagnostic.getPermissionAuthorizationStatus(function(status){
+      switch(status){
+      case cordova.plugins.diagnostic.runtimePermissionStatus.GRANTED:
+        console.log("Permission granted to read sms");
+        break;
+      case cordova.plugins.diagnostic.runtimePermissionStatus.NOT_REQUESTED:
+        console.log("Permission to read sms has not been requested yet");
+        requestPermission(cordova.plugins.diagnostic.runtimePermission.READ_SMS);
+        break;
+      case cordova.plugins.diagnostic.runtimePermissionStatus.DENIED:
+        console.log("Permission denied to read sms - ask again?");
+        break;
+      case cordova.plugins.diagnostic.runtimePermissionStatus.DENIED_ALWAYS:
+        console.log("Permission permanently denied to read sms - guess we won't be using it then!");
+        break;
+      }
+    }, function(error){
+      console.error("The following error occurred: "+error);
+    }, cordova.plugins.diagnostic.runtimePermission.READ_SMS);
+
+    // check if the sms plugin is ready
+    if ( SMS === undefined ) { alert( 'SMS plugin not ready' ); return; }
+    // starting the sms watch daemon
+    if(SMS) SMS.startWatch(function(){
+      console.log('in attesa di messaggio...');
+    }, function(){
+      console.log('impossibile avviare il demone');
+    });
+    // setting the event onSMSArrive
+    /*
+    document.addEventListener("onSMSArrive", function(e) {
+      var data = e.data;
+      console.log('SMS received: ', data);
+      $rootScope.$apply(function() {
+        console.log('SMS received: ', data);
+        $rootScope.smsList.push[data];
+      })
+    });
+     */
+    document.addEventListener("onSMSArrive", processSMS);
+
+    function processSMS(e) {
+      var data = e.data;
+      console.log('SMS received: '+ JSON.stringify(data,null,10));
+      $rootScope.$apply(function() {
+        console.log('SMS received: '+ JSON.stringify(data,null,10));
+        $rootScope.smsList.push[data];
+      });
+      //alert('SMS received!');
+      //alert(JSON.stringify(e, null, 10));
+    }
+
+    function requestPermission(type) {
+      cordova.plugins.diagnostic.requestRuntimePermission(function(status){
+        switch(status){
+        case cordova.plugins.diagnostic.runtimePermissionStatus.GRANTED:
+          console.log("Permission granted");
+          break;
+        case cordova.plugins.diagnostic.runtimePermissionStatus.NOT_REQUESTED:
+          console.log("Permission has not been requested yet");
+          break;
+        case cordova.plugins.diagnostic.runtimePermissionStatus.DENIED:
+          console.log("Permission denied - ask again?");
+          break;
+        case cordova.plugins.diagnostic.runtimePermissionStatus.DENIED_ALWAYS:
+          console.log("Permission permanently denied - guess we won't be using it then!");
+          break;
+        }
+      }, function(error){
+        console.error("The following error occurred: "+error);
+      }, type);
+
+    }
+
+  } ]);
 
 'use strict';
 
@@ -90,39 +190,41 @@ $(function() {
  * Controller of the reforguiApp
  */
 angular.module('reforguiApp')
-    .controller('MainCtrl', ["$scope", "$location", "$localStorage", "getdataws", function ($scope, $location, $localStorage, getdataws) {
-	$scope.awesomeThings = [
-	    'HTML5 Boilerplate',
-	    'AngularJS',
-	    'Karma'
-	];
+  .controller('MainCtrl', ["$scope", "$location", "$localStorage", "getdataws", "Carousel", function ($scope, $location, $localStorage, getdataws, Carousel) {
 
+    $scope.toConfirm = [];
+    $scope.toConfirm.push('NAZIONALE A2/F 4448 1:A.VIGATO 2:S.CANALI PFF GROUP FERRARA/MAGIKA CASTEL SAN PIETRO TERME 07/05/2016 21:00 PALA HILTON PHARMA P.le Atleti Azzurri d\'Italia 44124 FERRARA (FE)');
+    $scope.toConfirm.push('CR LOMBARDIA C2 14139 1:N.MONGELLI 2:S.CANALI VIRTUS PALL. GORLE/ARDOR BOLLATE 25/05/2016 21:00 Palazzetto Via Roma 2 24020 GORLE (BG)');
+    $scope.toConfirm.push('CP BERGAMO PROM.MASCH. 7139 1:L.CANALI 2:S.CANALI LA TORRE/BASKET CARAVAGGIO 23/05/2016 21:00 Palazzetto Via Milano 23 24020 TORRE BOLDONE (BG)');
+    console.log('che array ho qua: ', $scope.toConfirm);
 
-	$scope.init = function () {
-    	    // check if there are already some data stored on phone or not
+	  $scope.init = function () {
+      // initializing the pending confirmation slider
+      $scope.Carousel = Carousel;
 
-    	    if ($localStorage.userId != null) {
-    		$scope.user = $localStorage.userId;
-		getdataws.retrieveReferee($localStorage.userId)
-		    .success(function (data) {
-			if (data.length != 0 && data.length == 1) {
-			    $scope.user = data[0];
-			}
-		    });   
-    		console.log('sei qui!', $localStorage.userId);
-    	    } else {
-    		console.log('sei qui!', $localStorage.userId);
-    		$location.path( '/register' );
-    	    }
-	};
+      // check if there are already some data stored on phone or not
+      if ($localStorage.userId != null) {
+        $scope.user = $localStorage.userId;
+		    getdataws.retrieveReferee($localStorage.userId)
+	        .success(function (data) {
+			      if (data.length != 0 && data.length == 1) {
+			        $scope.user = data[0];
+			      }
+		      });
+        console.log('sei qui!', $localStorage.userId);
+      } else {
+        console.log('sei qui!', $localStorage.userId);
+        $location.path( '/register' );
+      }
+	  };
 
-	$scope.goBack = function () {
-	    window.history.back();
-	};
+	  $scope.goBack = function () {
+	      window.history.back();
+	  };
 
-	$scope.init();
+	  $scope.init();
 
-    }]);
+}]);
 
 'use strict';
 
@@ -461,6 +563,7 @@ angular.module('reforguiApp')
 	};
 
 	$scope.showFuture = function() {
+    $window.scrollTo(0,0);
     $scope.active = 2;
 	  $rootScope.active = $scope.active;
     //window.plugins.spinnerDialog.show();

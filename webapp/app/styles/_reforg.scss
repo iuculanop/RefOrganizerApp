@@ -21,6 +21,13 @@
   text-align: center !important;
 }
 
+.btn-trasp {
+  color: #286090;
+  background-color: transparent;
+  border-color: transparent;
+  padding: 0px !important;
+}
+
 .matches {
 	background: #f5f5f5;
 	border: 2px solid;
@@ -32,6 +39,10 @@
 .custstyle {
   color: darkblue !important;
   background-color: lightskyblue !important;
+}
+
+.showsms {
+  white-space:normal;
 }
 
 .bottom-left {
