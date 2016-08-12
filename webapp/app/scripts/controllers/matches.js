@@ -14,7 +14,6 @@ angular.module('reforguiApp')
 	$scope.active = 1;
 
 	$scope.init = function () {
-	  //window.plugins.spinnerDialog.show();
     if ($rootScope.active == -1 ) {
       $scope.active = 1;
     } else {
@@ -60,19 +59,19 @@ angular.module('reforguiApp')
 	$scope.showDone = function() {
 	  $scope.active = 0;
 	  $rootScope.active = $scope.active;
-    //window.plugins.spinnerDialog.show();
+    window.plugins.spinnerDialog.show();
 	  getdataws.retrieveMatches($scope.user.name,$scope.user.surname)
 		  .success(function (data) {
 		    $scope.refMatches = data;
 
 		    //console.log('lista delle partite', $scope.refMatches);
 		    $timeout(function() {
-			    //window.plugins.spinnerDialog.hide();
+			    window.plugins.spinnerDialog.hide();
 		    }, 1000);
 		  })
 		  .error(function (data,status) {
 		    alert('ci sono stati problemi con il server, riprovare più tardi');
-		    //window.plugins.spinnerDialog.hide();
+		    window.plugins.spinnerDialog.hide();
 		  });
 	};
 
@@ -80,7 +79,7 @@ angular.module('reforguiApp')
     $window.scrollTo(0,0);
     $scope.active = 1;
 	  $rootScope.active = $scope.active;
-    //window.plugins.spinnerDialog.show();
+    window.plugins.spinnerDialog.show();
     var date = new Date();
 	  date.setHours(0,0,0,0);
 	  $scope.date = $filter('date')(date,'yyyy-MM-dd HH:mm');
@@ -89,12 +88,12 @@ angular.module('reforguiApp')
 		    $scope.refMatches = data;
 
 		    $timeout(function() {
-			    //window.plugins.spinnerDialog.hide();
+			    window.plugins.spinnerDialog.hide();
 		    }, 1000);
 		  })
 		  .error(function (data,status) {
 		    alert('ci sono stati problemi con il server, riprovare più tardi');
-		    //window.plugins.spinnerDialog.hide();
+		    window.plugins.spinnerDialog.hide();
 		  });
 	};
 
@@ -102,7 +101,7 @@ angular.module('reforguiApp')
     $window.scrollTo(0,0);
     $scope.active = 2;
 	  $rootScope.active = $scope.active;
-    //window.plugins.spinnerDialog.show();
+    window.plugins.spinnerDialog.show();
 	  var startdate = new Date();
     startdate.setHours(0,0,0,0);
 	  $scope.start = $filter('date')(startdate,'yyyy-MM-dd HH:mm');
@@ -116,12 +115,12 @@ angular.module('reforguiApp')
 
 		      //console.log('lista delle partite', $scope.refMatches);
 		    $timeout(function() {
-			//window.plugins.spinnerDialog.hide();
+			    window.plugins.spinnerDialog.hide();
 		    }, 1000);
 		  })
 		  .error(function (data,status) {
 		    alert('ci sono stati problemi con il server, riprovare più tardi');
-		    //window.plugins.spinnerDialog.hide();
+		    window.plugins.spinnerDialog.hide();
 		  });
 	};
 

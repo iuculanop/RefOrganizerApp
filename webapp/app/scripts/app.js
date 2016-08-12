@@ -48,7 +48,7 @@ angular
         redirectTo: '/'
       });
   })
-  .run(["$rootScope", function($rootScope) {
+  .run(["$rootScope", "smsReceiver", function($rootScope, smsReceiver) {
     // setting global variables
     $rootScope.smsList=[];
     // checking the permissions - for android 23 or up
@@ -105,10 +105,13 @@ angular
 
     function processSMS(e) {
       var data = e.data;
-      console.log('SMS received: '+ JSON.stringify(data,null,10));
       $rootScope.$apply(function() {
         console.log('SMS received: '+ JSON.stringify(data,null,10));
-        $rootScope.smsList.push[data];
+        if (data.address === '+3934493248' || data.address === '+393471896070') {
+          console.log('messaggio da ehiweb da confermare');
+          smsReceiver.add(data.body);
+          console.log('messaggio inserito');
+        }
       });
     }
 

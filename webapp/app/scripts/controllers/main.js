@@ -8,13 +8,21 @@
  * Controller of the reforguiApp
  */
 angular.module('reforguiApp')
-  .controller('MainCtrl', function ($scope, $location, $localStorage, getdataws, Carousel) {
+  .controller('MainCtrl', function ($scope, $location, $rootScope, $localStorage, Carousel, getdataws, smsReceiver) {
 
+    /*
     $scope.toConfirm = [];
     $scope.toConfirm.push('NAZIONALE A2/F 4448 1:A.VIGATO 2:S.CANALI PFF GROUP FERRARA/MAGIKA CASTEL SAN PIETRO TERME 07/05/2016 21:00 PALA HILTON PHARMA P.le Atleti Azzurri d\'Italia 44124 FERRARA (FE)');
     $scope.toConfirm.push('CR LOMBARDIA C2 14139 1:N.MONGELLI 2:S.CANALI VIRTUS PALL. GORLE/ARDOR BOLLATE 25/05/2016 21:00 Palazzetto Via Roma 2 24020 GORLE (BG)');
     $scope.toConfirm.push('CP BERGAMO PROM.MASCH. 7139 1:L.CANALI 2:S.CANALI LA TORRE/BASKET CARAVAGGIO 23/05/2016 21:00 Palazzetto Via Milano 23 24020 TORRE BOLDONE (BG)');
     console.log('che array ho qua: ', $scope.toConfirm);
+     */
+
+    $scope.toConfirm = smsReceiver.list();
+
+    $scope.confirmMatch = function () {
+      console.log('chiama ufficio!');
+    }
 
 	  $scope.init = function () {
       // initializing the pending confirmation slider

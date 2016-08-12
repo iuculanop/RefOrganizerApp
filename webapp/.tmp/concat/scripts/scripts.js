@@ -48,7 +48,7 @@ angular
         redirectTo: '/'
       });
   }])
-  .run(["$rootScope", function($rootScope) {
+  .run(["$rootScope", "smsReceiver", function($rootScope, smsReceiver) {
     // setting global variables
     $rootScope.smsList=[];
     // checking the permissions - for android 23 or up
@@ -101,27 +101,18 @@ angular
       console.log('impossibile avviare il demone');
     });
     // setting the event onSMSArrive
-    /*
-    document.addEventListener("onSMSArrive", function(e) {
-      var data = e.data;
-      console.log('SMS received: ', data);
-      $rootScope.$apply(function() {
-        console.log('SMS received: ', data);
-        $rootScope.smsList.push[data];
-      })
-    });
-     */
     document.addEventListener("onSMSArrive", processSMS);
 
     function processSMS(e) {
       var data = e.data;
-      console.log('SMS received: '+ JSON.stringify(data,null,10));
       $rootScope.$apply(function() {
         console.log('SMS received: '+ JSON.stringify(data,null,10));
-        $rootScope.smsList.push[data];
+        if (data.address === '+3934493248' || data.address === '+393471896070') {
+          console.log('messaggio da ehiweb da confermare');
+          smsReceiver.add(data.body);
+          console.log('messaggio inserito');
+        }
       });
-      //alert('SMS received!');
-      //alert(JSON.stringify(e, null, 10));
     }
 
     function requestPermission(type) {
@@ -190,13 +181,21 @@ $(function() {
  * Controller of the reforguiApp
  */
 angular.module('reforguiApp')
-  .controller('MainCtrl', ["$scope", "$location", "$localStorage", "getdataws", "Carousel", function ($scope, $location, $localStorage, getdataws, Carousel) {
+  .controller('MainCtrl', ["$scope", "$location", "$rootScope", "$localStorage", "Carousel", "getdataws", "smsReceiver", function ($scope, $location, $rootScope, $localStorage, Carousel, getdataws, smsReceiver) {
 
+    /*
     $scope.toConfirm = [];
     $scope.toConfirm.push('NAZIONALE A2/F 4448 1:A.VIGATO 2:S.CANALI PFF GROUP FERRARA/MAGIKA CASTEL SAN PIETRO TERME 07/05/2016 21:00 PALA HILTON PHARMA P.le Atleti Azzurri d\'Italia 44124 FERRARA (FE)');
     $scope.toConfirm.push('CR LOMBARDIA C2 14139 1:N.MONGELLI 2:S.CANALI VIRTUS PALL. GORLE/ARDOR BOLLATE 25/05/2016 21:00 Palazzetto Via Roma 2 24020 GORLE (BG)');
     $scope.toConfirm.push('CP BERGAMO PROM.MASCH. 7139 1:L.CANALI 2:S.CANALI LA TORRE/BASKET CARAVAGGIO 23/05/2016 21:00 Palazzetto Via Milano 23 24020 TORRE BOLDONE (BG)');
     console.log('che array ho qua: ', $scope.toConfirm);
+     */
+
+    $scope.toConfirm = smsReceiver.list();
+
+    $scope.confirmMatch = function () {
+      console.log('chiama ufficio!');
+    }
 
 	  $scope.init = function () {
       // initializing the pending confirmation slider
@@ -431,36 +430,73 @@ angular.module('reforguiApp')
     // ...
 
     //var dev_path = "http://phabtest.divsi.unimi.it/reforg/";
-    var dev_path = "http://www.elmariachistudios.it/reforg/";
+    var devPath = 'http://www.elmariachistudios.it/reforg/';
     var meaningOfLife = 42;
 
     // Public API here
     return {
-	someMethod: function () {
-            return meaningOfLife;
-	},
+	    someMethod: function () {
+        return meaningOfLife;
+	    },
 
-	retrieveReferee: function(codref) {
-            return $http.get(dev_path+"referee?id="+codref);
-	},
+	    retrieveReferee: function(codref) {
+        return $http.get(devPath+'referee?id='+codref);
+	    },
 
-	createReferee: function(ref) {
-            return $http.put(dev_path+"referee/create", ref);
-	},
+	    createReferee: function(ref) {
+        return $http.put(devPath+'referee/create', ref);
+	    },
 
-	retrieveMatches: function(refName,refSurname,gmStartdate,gmEndDate) {
-	    if (!gmStartdate) {
-		return $http.get(dev_path+"match?name="+refName+"&surname="+refSurname);
-	    } else {
-		return $http.get(dev_path+"match/todos?name="+refName+"&surname="+refSurname+"&start="+gmStartdate+"&end="+gmEndDate);
+      updateReferee: function(ref) {
+        return $http.post(devPath+'referee/update?address=true&contacts=true', ref);
+      },
+
+	    retrieveMatches: function(refName,refSurname,gmStartdate,gmEndDate) {
+	      if (!gmStartdate) {
+		      return $http.get(devPath+'match?name='+refName+'&surname='+refSurname);
+	      } else {
+		      return $http.get(devPath+'match/todos?name='+refName+'&surname='+refSurname+'&start='+gmStartdate+'&end='+gmEndDate);
+	      }
+	    },
+
+	    updateMatch: function(match) {
+	      return $http.put(devPath+'match/update', match);
 	    }
-	},
-
-	updateMatch: function(match) {
-	    return $http.put(dev_path+"match/update", match);
-	}
     };
   }]);
+
+'use strict';
+
+/**
+ * @ngdoc service
+ * @name reforguiApp.smsReceiver
+ * @description
+ * # smsReceiver
+ * Factory in the reforguiApp.
+ */
+angular.module('reforguiApp')
+  .factory('smsReceiver', function () {
+    // Service logic
+    // ...
+
+    var smsList = [];
+
+    // Public API here
+    return {
+      list: function() {
+        return smsList;
+      },
+
+      add: function (item) {
+        smsList.push(item);
+	    },
+
+	    remove: function(index) {
+        smsList.splice(index,1);
+	    }
+    };
+
+  });
 
 'use strict';
 
@@ -478,7 +514,6 @@ angular.module('reforguiApp')
 	$scope.active = 1;
 
 	$scope.init = function () {
-	  //window.plugins.spinnerDialog.show();
     if ($rootScope.active == -1 ) {
       $scope.active = 1;
     } else {
@@ -524,19 +559,19 @@ angular.module('reforguiApp')
 	$scope.showDone = function() {
 	  $scope.active = 0;
 	  $rootScope.active = $scope.active;
-    //window.plugins.spinnerDialog.show();
+    window.plugins.spinnerDialog.show();
 	  getdataws.retrieveMatches($scope.user.name,$scope.user.surname)
 		  .success(function (data) {
 		    $scope.refMatches = data;
 
 		    //console.log('lista delle partite', $scope.refMatches);
 		    $timeout(function() {
-			    //window.plugins.spinnerDialog.hide();
+			    window.plugins.spinnerDialog.hide();
 		    }, 1000);
 		  })
 		  .error(function (data,status) {
 		    alert('ci sono stati problemi con il server, riprovare più tardi');
-		    //window.plugins.spinnerDialog.hide();
+		    window.plugins.spinnerDialog.hide();
 		  });
 	};
 
@@ -544,7 +579,7 @@ angular.module('reforguiApp')
     $window.scrollTo(0,0);
     $scope.active = 1;
 	  $rootScope.active = $scope.active;
-    //window.plugins.spinnerDialog.show();
+    window.plugins.spinnerDialog.show();
     var date = new Date();
 	  date.setHours(0,0,0,0);
 	  $scope.date = $filter('date')(date,'yyyy-MM-dd HH:mm');
@@ -553,12 +588,12 @@ angular.module('reforguiApp')
 		    $scope.refMatches = data;
 
 		    $timeout(function() {
-			    //window.plugins.spinnerDialog.hide();
+			    window.plugins.spinnerDialog.hide();
 		    }, 1000);
 		  })
 		  .error(function (data,status) {
 		    alert('ci sono stati problemi con il server, riprovare più tardi');
-		    //window.plugins.spinnerDialog.hide();
+		    window.plugins.spinnerDialog.hide();
 		  });
 	};
 
@@ -566,7 +601,7 @@ angular.module('reforguiApp')
     $window.scrollTo(0,0);
     $scope.active = 2;
 	  $rootScope.active = $scope.active;
-    //window.plugins.spinnerDialog.show();
+    window.plugins.spinnerDialog.show();
 	  var startdate = new Date();
     startdate.setHours(0,0,0,0);
 	  $scope.start = $filter('date')(startdate,'yyyy-MM-dd HH:mm');
@@ -580,12 +615,12 @@ angular.module('reforguiApp')
 
 		      //console.log('lista delle partite', $scope.refMatches);
 		    $timeout(function() {
-			//window.plugins.spinnerDialog.hide();
+			    window.plugins.spinnerDialog.hide();
 		    }, 1000);
 		  })
 		  .error(function (data,status) {
 		    alert('ci sono stati problemi con il server, riprovare più tardi');
-		    //window.plugins.spinnerDialog.hide();
+		    window.plugins.spinnerDialog.hide();
 		  });
 	};
 
@@ -709,7 +744,16 @@ angular.module('reforguiApp')
     }
 
     $scope.update = function () {
-      $scope.user = angular.copy($scope.editedUser);
+      window.plugins.spinnerDialog.show();
+      getdataws.updateReferee($scope.editedUser)
+        .success(function (data) {
+          window.plugins.spinnerDialog.hide();
+          $scope.user = angular.copy($scope.editedUser);
+        })
+        .error(function (data,status) {
+          window.plugins.spinnerDialog.hide();
+          alert('ci sono stati problemi con il server, riprovare più tardi');
+        });
       setInitialState();
     }
 

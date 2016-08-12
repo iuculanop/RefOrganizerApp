@@ -32,7 +32,16 @@ angular.module('reforguiApp')
     }
 
     $scope.update = function () {
-      $scope.user = angular.copy($scope.editedUser);
+      window.plugins.spinnerDialog.show();
+      getdataws.updateReferee($scope.editedUser)
+        .success(function (data) {
+          window.plugins.spinnerDialog.hide();
+          $scope.user = angular.copy($scope.editedUser);
+        })
+        .error(function (data,status) {
+          window.plugins.spinnerDialog.hide();
+          alert('ci sono stati problemi con il server, riprovare più tardi');
+        });
       setInitialState();
     }
 
